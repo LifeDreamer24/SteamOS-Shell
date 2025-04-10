@@ -64,9 +64,7 @@ A lightweight shell replacement for Windows that launches **Steam in Big Picture
 
 ## 🙌 Credits
 
-Huge thanks to **[Simon](https://github.com/LifeDreamer24)** for creating and refining this shell setup with care and precision!
-
-Built with guidance, scripting, and troubleshooting help from **ChatGPT by OpenAI** 🤖  
+Huge thanks to **ChatGPT by OpenAI** for the guidance, scripting, and troubleshooting help given.
 If you found this project useful, feel free to give it a ⭐!
 
 ---
