@@ -1,7 +1,10 @@
+![Windows 10+](https://img.shields.io/badge/platform-Windows%2010%2B-blue)
+![Steam Shell](https://img.shields.io/badge/Steam-GamepadUI-lightgrey)
+![Portable](https://img.shields.io/badge/portable-yes-success)
 
 # 🕹️ SteamOS Shell for Windows
 
-A lightweight shell replacement for Windows that launches **Steam in classic Big Picture Mode (Gamepad UI)** using the `-steamos -gamepadui` flags — perfect for turning your PC into a couch-friendly, gaming console-like experience.
+A lightweight shell replacement for Windows that launches **Steam in Big Picture Mode (Gamepad UI)** using the `-steamos -gamepadui -dev` flags — perfect for turning your PC into a couch-friendly, gaming console-like experience.
 
 ---
 
