@@ -40,14 +40,26 @@ A lightweight shell replacement for Windows that launches **Steam in Big Picture
 
 ---
 
-## 🔙 Uninstall
+## 🖥️ Manually Opening the Windows Desktop
+
+If you accidentally close the Steam window without fully exiting Steam, the desktop may not appear automatically. Here’s how to get it back manually:
+	1.	Press Ctrl + Shift + Esc to open Task Manager.
+	2.	Click File > Run new task.
+	3.	Type `explorer` and hit Enter.
+	4.	The standard Windows interface (taskbar, desktop, etc.) will reappear.
+
+> You can also press Ctrl + Alt + Del and choose Task Manager from the menu if you’re stuck.
+
+---
+
+## 🔙 Uninstallation
 
 1. Run `uninstall-steamos.bat`.
 2. Your system will reboot into the normal Windows desktop shell.
 
 ---
 
-## 💡 Notes
+## 💡 Side Notes
 
 - The script waits for internet availability before launching Steam to prevent “Steam needs to be online to update” errors.
 - You can extend it to support other launchers like Playnite, EmulationStation, etc.
