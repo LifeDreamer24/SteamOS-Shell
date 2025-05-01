@@ -1,85 +1,80 @@
-![Windows 10+](https://img.shields.io/badge/platform-Windows%2010%2B-blue)
-![Steam Shell](https://img.shields.io/badge/Steam-GamepadUI-lightgrey)
-![Portable](https://img.shields.io/badge/portable-yes-success)
+![Windows 10+](https://img.shields.io/badge/platform-Windows%2010%2B-blue)  
+![Steam Shell](https://img.shields.io/badge/Steam-GamepadUI-lightgrey)  
+![Installer](https://img.shields.io/badge/setup-EXE--based-yellow)
 
-# 🕹️ SteamOS Shell for Windows
+# 🕹️ SteamOS Shell for Windows — Executable Installer Edition
 
-A lightweight shell replacement for Windows that launches **Steam in Big Picture Mode (Gamepad UI)** using the `-steamos -gamepadui -dev` flags — perfect for turning your PC into a couch-friendly, gaming console-like experience.
+**SteamOS Shell** is a Windows shell replacement that launches **Steam in Big Picture Mode (Gamepad UI)** on startup, turning your PC into a console-like, couch-friendly gaming experience.  
+This branch uses a **compiled executable installer** created with *Advanced BAT to EXE Converter PRO v4.61* for fully automated setup.
 
 ---
 
 ## 🚀 Features
 
-- Launches **Steam Big Picture Mode (Gamepad UI)** instead of Explorer on startup
-- Waits for network availability to avoid Steam update errors
-- Restores **Explorer** automatically when Steam is closed
-- Fully **portable & path-independent**
-- Includes one-click setup & uninstall scripts
+- Replaces the Windows shell with **Steam Big Picture Mode**
+- Waits for internet connection to avoid Steam update errors
+- Restores **Windows Explorer** when Steam is closed
+- Uses `%LOCALAPPDATA%\SteamOSShell` for all files (fully portable)
+- Desktop shortcut included for easy logout and return to Game Mode
+- Fully automated **EXE installer** — no manual script running required
 
 ---
 
-## 📦 What's Included
+## 🖥️ What the Installer Does
 
-- `launch-steamos.bat` – The shell entry point, launches the script
-- `enable-steamos.ps1` – Main script that waits for network and launches Steam in Big Picture mode
-- `setup-steamos.ps1` – Installs the custom shell into `%LOCALAPPDATA%` and sets it as your shell
-- `setup-steamos.bat` – One-click admin launcher for the setup script
-- `disable-steamos.ps1` – Restores the default Explorer shell and cleans up
-- `uninstall-steamos.bat` – One-click admin launcher for the uninstall script
-- `README.txt` – Basic offline instructions (optional)
+- Extracts all necessary files into `%LOCALAPPDATA%\SteamOSShell`
+- Saves your custom Steam install path in `steam_path.txt`
+- Copies a custom icon to the same folder
+- Creates a shortcut on the desktop: **"Go to Gamemode"**
+- Sets `launch-steamos.bat` as the system shell on login
 
 ---
 
-## 🛠️ Installation
+## 🛠️ Included (Behind the Scenes)
 
-1. Download this repo and extract it anywhere.
-2. Run `setup-steamos.bat`.
-3. Your system will reboot into Steam Big Picture mode automatically!
-
-> The setup script copies everything to `%LOCALAPPDATA%\SteamOSShell` so it's fully portable.
+- `setup-steamos.ps1` – Main setup logic (shell registration + file handling)
+- `enable-steamos.ps1` – Launches Steam in Gamepad UI after checking network
+- `disable-steamos.ps1` – Restores default Explorer shell
+- `launch-steamos.bat` – Shell entry point script
+- `uninstall-steamos.bat` – Removes the shell and restores original config
+- `steamdeck-gaming-return.ico` – Icon used for the desktop shortcut
 
 ---
 
-## 🖥️ Manually Opening the Windows Desktop
+## ❓ How to Restore Desktop Manually
 
-If you accidentally close the Steam window without fully exiting Steam, the desktop may not appear automatically. Here’s how to get it back manually:
-1. Press Ctrl + Shift + Esc to open Task Manager.
-2.	Click File > Run new task.
-3.	Type `explorer` and hit Enter.
-4.	The standard Windows interface (taskbar, desktop, etc.) will reappear.
+If Steam closes and you are left with a black screen:
 
-> You can also press Ctrl + Alt + Del and choose Task Manager from the menu if you’re stuck.
+1. Press `Ctrl + Shift + Esc` to open **Task Manager**
+2. Go to **File > Run new task**
+3. Type `explorer` and press Enter
+
+You can also press `Ctrl + Alt + Del` and select Task Manager if stuck.
 
 ---
 
 ## 🔙 Uninstallation
 
-1. Run `uninstall-steamos.bat`.
-2. Your system will reboot into the normal Windows desktop shell.
-
----
-
-## 💡 Side Notes
-
-- The script waits for internet availability before launching Steam to prevent “Steam needs to be online to update” errors.
-- You can extend it to support other launchers like Playnite, EmulationStation, etc.
+- Run `uninstall-steamos.bat` from `%LOCALAPPDATA%\SteamOSShell`
+- Your system will reboot into the standard Windows desktop environment
 
 ---
 
 ## 🧠 Requirements
 
-- Windows 10 or 11
+- Windows 10 or 11 (64-bit)
 - Steam installed
-- Admin rights to change the shell
+- Administrator rights for setup
 
 ---
 
 ## 🙌 Credits
 
-Huge thanks to **ChatGPT by OpenAI** for the guidance, scripting, and troubleshooting help given.
-If you found this project useful, feel free to give it a ⭐!
+Big thanks to **ChatGPT by OpenAI** for help with scripting, logic, and automation.  
+Created with passion by **LifeDreamer24**
+
+If you like this project, please consider giving it a ⭐ on GitHub!
 
 ---
 
-Thank you for using!
 Game on. 🎮
