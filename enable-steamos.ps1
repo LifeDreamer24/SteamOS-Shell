@@ -19,8 +19,10 @@ if (-not $online) {
     Write-Host "Network not detected. Proceeding anyway..."
 }
 
-# Launch Steam Gamepad UI
-Start-Process "C:\Program Files (x86)\Steam\Steam.exe" -ArgumentList "-steamos -gamepadui -dev"
+# Fetch Steam path from steam_path.txt
+$CUSTOM_STEAM_PATH = Get-Content -Path "$PSScriptRoot\steam_path.txt" -Raw
+$CUSTOM_STEAM_PATH = $CUSTOM_STEAM_PATH.Trim()
+
 
 # Wait for Steam to close, then restore Explorer shell
 Get-Process Steam -ErrorAction SilentlyContinue | Wait-Process
