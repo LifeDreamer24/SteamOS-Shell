@@ -23,6 +23,8 @@ if (-not $online) {
 $CUSTOM_STEAM_PATH = Get-Content -Path "$PSScriptRoot\steam_path.txt" -Raw
 $CUSTOM_STEAM_PATH = $CUSTOM_STEAM_PATH.Trim()
 
+# Launch Steam with custom parameters
+Start-Process "$CUSTOM_STEAM_PATH\steam.exe" -ArgumentList '-noverifyfiles', '-steamos', '-gamepadui', '-fulldesktopres'
 
 # Wait for Steam to close, then restore Explorer shell
 Get-Process Steam -ErrorAction SilentlyContinue | Wait-Process

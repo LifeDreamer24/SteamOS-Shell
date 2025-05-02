@@ -1,7 +1,7 @@
 @ECHO OFF
 REM BFCPEOPTIONSTART
 REM Advanced BAT to EXE Converter www.BatToExeConverter.com
-REM BFCPEEXE=C:\Users\LifeDreamer24\Desktop\SteamOS Gamemode For Windows 11 Installer.exe
+REM BFCPEEXE=C:\Users\LifeDreamer24\Desktop\SteamOS Gamemode For Windows Installer.exe
 REM BFCPEICON=C:\Users\LifeDreamer24\Pictures\steamdeck-gaming-return.ico
 REM BFCPEICONINDEX=-1
 REM BFCPEEMBEDDISPLAY=0
