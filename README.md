@@ -5,7 +5,7 @@
 # 🕹️ SteamOS Shell for Windows — Executable Installer Edition
 
 **SteamOS Shell** is a Windows shell replacement that launches **Steam in Big Picture Mode (Gamepad UI)** on startup, turning your PC into a console-like, couch-friendly gaming experience.  
-This branch uses a **compiled executable installer** created with *Advanced BAT to EXE Converter PRO v4.61* for fully automated setup.
+This branch uses a **compiled executable installer** created with *Advanced BAT to EXE Converter PRO* for fully automated setup.
 
 ---
 
