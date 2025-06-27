@@ -19,19 +19,29 @@ if (-not $online) {
     Write-Host "Network not detected. Proceeding anyway..."
 }
 
-# Fetch Steam path from steam_path.txt
+# Fetch Steam path
 $CUSTOM_STEAM_PATH = Get-Content -Path "$PSScriptRoot\\steam_path.txt" -Raw
 $CUSTOM_STEAM_PATH = $CUSTOM_STEAM_PATH.Trim()
 
-# Launch Steam and track the process ID
-$steamProc = Start-Process "$CUSTOM_STEAM_PATH\\steam.exe" -ArgumentList '-noverifyfiles', '-steamos', '-gamepadui', '-fulldesktopres' -PassThru
-$steamPid = $steamProc.Id
+# Launch Steam
+Start-Process "$CUSTOM_STEAM_PATH\\steam.exe" -ArgumentList '-noverifyfiles', '-steamos', '-gamepadui', '-fulldesktopres'
 
-# Wait until the specific process ends
-try {
-    Wait-Process -Id $steamPid
-    # Only reach here if that exact Steam process exited (not restarted)
-    Start-Process explorer.exe
-} catch {
-    Write-Host "Steam process wait failed or was terminated unexpectedly."
+# Wait until ALL steam.exe processes are gone for at least 10 seconds
+$stableCount = 0
+while ($true) {
+    $running = Get-Process steam -ErrorAction SilentlyContinue
+    if ($running) {
+        $stableCount = 0  # Reset if Steam is still running
+    } else {
+        $stableCount++
+    }
+
+    if ($stableCount -ge 10) {
+        break  # Steam has been gone for 10 seconds
+    }
+
+    Start-Sleep -Seconds 1
 }
+
+# Now safe to restore explorer shell
+Start-Process explorer.exe
