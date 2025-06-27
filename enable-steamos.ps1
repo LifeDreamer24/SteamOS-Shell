@@ -20,13 +20,18 @@ if (-not $online) {
 }
 
 # Fetch Steam path from steam_path.txt
-$CUSTOM_STEAM_PATH = Get-Content -Path "$PSScriptRoot\steam_path.txt" -Raw
+$CUSTOM_STEAM_PATH = Get-Content -Path "$PSScriptRoot\\steam_path.txt" -Raw
 $CUSTOM_STEAM_PATH = $CUSTOM_STEAM_PATH.Trim()
 
-# Launch Steam with custom parameters
-Start-Process "$CUSTOM_STEAM_PATH\steam.exe" -ArgumentList '-noverifyfiles', '-steamos', '-gamepadui', '-fulldesktopres'
+# Launch Steam and track the process ID
+$steamProc = Start-Process "$CUSTOM_STEAM_PATH\\steam.exe" -ArgumentList '-noverifyfiles', '-steamos', '-gamepadui', '-fulldesktopres' -PassThru
+$steamPid = $steamProc.Id
 
-# Wait for Steam to close, then restore Explorer shell
-Get-Process Steam -ErrorAction SilentlyContinue | Wait-Process
-
-Start-Process explorer.exe
+# Wait until the specific process ends
+try {
+    Wait-Process -Id $steamPid
+    # Only reach here if that exact Steam process exited (not restarted)
+    Start-Process explorer.exe
+} catch {
+    Write-Host "Steam process wait failed or was terminated unexpectedly."
+}
