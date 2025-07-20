@@ -1,8 +1,8 @@
 @ECHO OFF
 REM BFCPEOPTIONSTART
 REM Advanced BAT to EXE Converter www.BatToExeConverter.com
-REM BFCPEEXE=C:\Users\LifeDreamer24\OneDrive\Documents\SteamOS Gamemode For Windows Installer.exe
-REM BFCPEICON=C:\Users\LifeDreamer24\OneDrive\Documents\SteamOS_Installer_Pack\steamdeck-gaming-return.ico
+REM BFCPEEXE=C:\Users\simon\OneDrive\Documents\SteamOS Gamemode For Windows Installer.exe
+REM BFCPEICON=C:\Users\simon\OneDrive\Documents\SteamOS_Installer_Pack\steamdeck-gaming-return.ico
 REM BFCPEICONINDEX=-1
 REM BFCPEEMBEDDISPLAY=0
 REM BFCPEEMBEDDELETE=1
@@ -19,12 +19,12 @@ REM BFCPEDISABLEQE=0
 REM BFCPEWINDOWHEIGHT=30
 REM BFCPEWINDOWWIDTH=120
 REM BFCPEWTITLE=SteamOS Gamemode For Windows 11 Installer
-REM BFCPEEMBED=C:\Users\LifeDreamer24\OneDrive\Documents\SteamOS_Installer_Pack\disable-steamos.ps1
-REM BFCPEEMBED=C:\Users\LifeDreamer24\OneDrive\Documents\SteamOS_Installer_Pack\enable-steamos.ps1
-REM BFCPEEMBED=C:\Users\LifeDreamer24\OneDrive\Documents\SteamOS_Installer_Pack\launch-steamos.bat
-REM BFCPEEMBED=C:\Users\LifeDreamer24\OneDrive\Documents\SteamOS_Installer_Pack\setup-steamos.ps1
-REM BFCPEEMBED=C:\Users\LifeDreamer24\OneDrive\Documents\SteamOS_Installer_Pack\steamdeck-gaming-return.ico
-REM BFCPEEMBED=C:\Users\LifeDreamer24\OneDrive\Documents\SteamOS_Installer_Pack\uninstall-steamos.bat
+REM BFCPEEMBED=C:\Users\simon\OneDrive\Documents\SteamOS_Installer_Pack\disable-steamos.ps1
+REM BFCPEEMBED=C:\Users\simon\OneDrive\Documents\SteamOS_Installer_Pack\enable-steamos.ps1
+REM BFCPEEMBED=C:\Users\simon\OneDrive\Documents\SteamOS_Installer_Pack\uninstall-steamos.bat
+REM BFCPEEMBED=C:\Users\simon\OneDrive\Documents\SteamOS_Installer_Pack\setup-steamos.ps1
+REM BFCPEEMBED=C:\Users\simon\OneDrive\Documents\SteamOS_Installer_Pack\steamdeck-gaming-return.ico
+REM BFCPEEMBED=C:\Users\simon\OneDrive\Documents\SteamOS_Installer_Pack\launch-steamos.bat
 REM BFCPEOPTIONEND
 
 :: --- Custom SteamOS Installer Logic ---
@@ -44,7 +44,7 @@ cls
 powershell -Command "&{ Start-Process powershell -ArgumentList '-ExecutionPolicy Bypass -WindowStyle Hidden -File \"%MYFILES%\setup-steamos.ps1\"' -Verb RunAs}"
 
 :: Ask user for Steam install location
-SET /P CUSTOM_STEAM_PATH=Enter your Steam install path [default: C:\Program Files (x86)\Steam]: 
+SET /P CUSTOM_STEAM_PATH=Enter your custom Steam install path if any. Just press ENTER if yours is unchanged: 
 IF "%CUSTOM_STEAM_PATH%"=="" SET CUSTOM_STEAM_PATH=C:\Program Files (x86)\Steam
 ECHO %CUSTOM_STEAM_PATH% > "%LOCALAPPDATA%\SteamOSShell\steam_path.txt"
 
