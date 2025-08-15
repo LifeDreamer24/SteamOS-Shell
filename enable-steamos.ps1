@@ -24,7 +24,7 @@ $CUSTOM_STEAM_PATH = Get-Content -Path "$PSScriptRoot\\steam_path.txt" -Raw
 $CUSTOM_STEAM_PATH = $CUSTOM_STEAM_PATH.Trim()
 
 # Launch Steam
-Start-Process "$CUSTOM_STEAM_PATH\\steam.exe" -ArgumentList '-noverifyfiles', '-steamos', '-gamepadui', '-fulldesktopres'
+Start-Process "$CUSTOM_STEAM_PATH\\steam.exe" -ArgumentList '-noverifyfiles', '-gamepadui', '-fulldesktopres'
 
 # Wait until ALL steam.exe processes are gone for at least 10 seconds
 $stableCount = 0
