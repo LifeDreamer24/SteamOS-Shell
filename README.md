@@ -1,3 +1,6 @@
+![Windows 10+](https://img.shields.io/badge/platform-Windows%2010%2B-blue)  
+![Steam Shell](https://img.shields.io/badge/Steam-GamepadUI-lightgrey)  
+![Installer](https://img.shields.io/badge/setup-EXE--based-yellow)
 
 # SteamOS Shell for Windows
 
