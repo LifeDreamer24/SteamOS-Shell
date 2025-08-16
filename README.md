@@ -1,67 +1,114 @@
+
 # SteamOS Shell for Windows
 
-A custom Windows shell replacement that launches Steam Big Picture / Gamemode automatically when you log in — just like SteamOS.  
-When Steam closes, Explorer is restored and the user is logged out, giving you a console-like experience on Windows.
+A tiny installer that flips your Windows shell to **Steam Big Picture** for a console‑like experience — and flips you back to the desktop when you choose. Built with Inno Setup.
+
+> Perfect for living‑room PCs or a dedicated “Steam console” feel on Windows.
 
 ---
 
 ## ✨ Features
-- Replaces **Explorer.exe** with a custom shell that starts Steam in Big Picture Mode.
-- When Steam exits, waits 10 seconds, restores Explorer shell, then logs out cleanly.
-- **Optional Start Menu shortcuts** (configurable during installation).
-- Proper uninstall entry in **Windows Settings → Apps & Features**.
-- Includes desktop shortcut `Go to Gamemode`.
-- Installer built with **Inno Setup**.
+
+- **Steam as the Windows shell** — boots straight into Steam Big Picture.
+- **Clean session exit** — when Steam closes, the user session **logs out** automatically (≈10 seconds) instead of restoring Explorer.
+- **Start Menu integration** — a Start Menu folder is created automatically (no checkbox).  
+- **Ready page shows your Steam folder** — the installer’s _Ready to Install_ page displays the Steam path you chose.
+- **Uninstallable from Settings** — appears in **Settings → Apps → Installed apps** and in the Start Menu folder.
 
 ---
 
-## 📥 Installation
-1. Download the latest release from the [Releases](../../releases) page.
-2. Run the installer (`SteamOS-Shell-Setup.exe`).
-3. During setup you can:
-   - Choose whether to create Start Menu shortcuts.
-   - Install/uninstall at any time via Windows Settings.
+## 🧰 Requirements
 
-After installation, logging into Windows will start Steam instead of Explorer.
+- Windows 10/11 (64‑bit tested)
+- Steam installed
+- Administrator rights during install (required to set the shell and write program files)
 
 ---
 
-## 🔄 Uninstall
-You can remove SteamOS Shell in two ways:
-- Open **Windows Settings → Apps → Installed Apps → SteamOS Shell → Uninstall**.
-- Or run `unins000.exe` from the installation folder.
+## 🚀 Install
+
+1. Run the installer.
+2. Choose your **Steam folder** (the path is shown on the “Ready to Install” page).
+3. Click **Install**.
+4. Sign out/in if prompted, or reboot to start directly in Steam Big Picture.
+
+> The Start Menu folder is created automatically. You don’t need to tick any option.
 
 ---
 
-## ⚠️ Safety & Recovery
-Changing the Windows shell is an advanced tweak.  
-If Steam fails to start, you might see a blank or gray screen after login.
+## 🧭 How it works
 
-To recover:
-1. Press `Ctrl+Shift+Esc` to open **Task Manager**.
-2. Go to **File → Run new task**.
-3. Type:
-   ```
-   reg add "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Shell /t REG_SZ /d explorer.exe /f
-   ```
-4. Log off and back on. Explorer should return as the default shell.
+- The installer sets the Windows **shell** to launch Steam Big Picture instead of `explorer.exe`.
+- Helper scripts are installed to `AppData\Roaming\SteamOSShell` (e.g., `gamemode-launcher.vbs`, `go-gamemode.cmd`, `go-desktop.cmd`).
+- When Steam exits, a small supervisor logs out the user after ~**10 seconds**. This keeps the “console mode” clean and avoids returning to Explorer.
 
 ---
 
-## 🛠 Development
-This installer is written in [Inno Setup](https://jrsoftware.org/isinfo.php).  
-Key customizations:
-- `gamemode.ps1` handles Steam launch, Explorer restore, and logout.
-- `gamemode-launcher.vbs` runs PowerShell scripts hidden.
-- Inno `[Tasks]` used for optional Start Menu entries.
+## ↩️ Going back to Desktop (temporarily)
+
+If you need a normal desktop session:
+
+- Use the provided **“Go to Desktop”** helper (if exposed in your Start Menu folder), **or**
+- Press **Ctrl+Alt+Del → Sign out**, then sign back in to a desktop account where Explorer is still the default shell, **or**
+- Manually run `explorer.exe` from **Task Manager → Run new task** (temporary; next login will still boot to Steam unless you uninstall or reset the shell).
+
+---
+
+## 🗑️ Uninstall
+
+- **Settings → Apps → Installed apps → SteamOS Shell → Uninstall**  
+  (Also available from the **Start Menu → SteamOS Shell** folder.)
+
+Uninstall restores the default **Explorer** shell on next sign‑in.
+
+---
+
+## 🛠️ Build from source
+
+1. Install **[Inno Setup 6.x](https://jrsoftware.org/isinfo.php)**.
+2. Open `SteamOS-Shell.iss` and compile.
+3. The script includes:
+   - A `CurPageChanged(wpReady)` handler that appends the chosen **Steam folder** to the Ready page memo.
+   - Automatic Start Menu folder creation (no user checkbox).
+   - Logout‑on‑exit flow (fixed delay ~10s).
+
+> If you customize the delay or behavior, search for the logout/supervisor section and adjust the constant value accordingly.
+
+---
+
+## 🧩 Troubleshooting
+
+**Installer says it “failed to write” files under AppData**  
+Make sure you’re installing as the intended user and have permission for `%AppData%\SteamOSShell`. Close Steam before installing.
+
+**Steam closes and I’m stuck / no desktop appears**  
+This is by design: the session logs out after ~10s. If you need to keep the desktop, restore Explorer as the shell (uninstall) or adjust the delay in the script.
+
+**Ready page doesn’t show my Steam folder**  
+Use the latest script — it adds the Steam folder line during `wpReady`. If you forked, ensure the `CurPageChanged` handler isn’t duplicated.
+
+**PrivilegesRequired warning during compile**  
+The script uses per‑user locations but requires admin for shell changes; this is expected. Keep admin install mode enabled.
+
+---
+
+## 📦 Project layout (installed)
+
+```
+%AppData%\SteamOSShell\
+ ├─ gamemode-launcher.vbs
+ ├─ go-gamemode.cmd
+ └─ go-desktop.cmd
+```
 
 ---
 
 ## 🤝 Contributing
-Pull requests welcome! Ideas, bug fixes, and improvements are appreciated.  
-If you encounter issues, open an [issue](../../issues).
+
+Issues and PRs welcome! Please describe your Windows version, Steam build, and attach logs/screens when reporting bugs.
 
 ---
 
 ## 📜 License
-MIT License — feel free to use, modify, and share.
+
+MIT (or your preference). Add a LICENSE file if you haven’t already.
