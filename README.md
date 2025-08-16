@@ -111,4 +111,4 @@ Issues and PRs welcome! Please describe your Windows version, Steam build, and a
 
 ## 📜 License
 
-MIT (or your preference). Add a LICENSE file if you haven’t already.
+MIT License — feel free to use, modify, and share.
