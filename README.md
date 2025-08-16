@@ -2,11 +2,12 @@
 ![Steam Shell](https://img.shields.io/badge/Steam-GamepadUI-lightgrey)  
 ![Installer](https://img.shields.io/badge/setup-EXE--based-yellow)
 
+
 # SteamOS Shell for Windows
 
-A tiny installer that flips your Windows shell to **Steam Big Picture** for a console‑like experience — and flips you back to the desktop when you choose. Built with Inno Setup.
+A tiny installer that flips your Windows shell to **Steam Big Picture** for a console-like experience — and flips you back to the desktop when you choose. Built with Inno Setup.
 
-> Perfect for living‑room PCs or a dedicated “Steam console” feel on Windows.
+> Perfect for living-room PCs or a dedicated “Steam console” feel on Windows.
 
 ---
 
@@ -22,7 +23,7 @@ A tiny installer that flips your Windows shell to **Steam Big Picture** for a co
 
 ## 🧰 Requirements
 
-- Windows 10/11 (64‑bit tested)
+- Windows 10/11 (64-bit tested)
 - Steam installed
 - Administrator rights during install (required to set the shell and write program files)
 
@@ -42,7 +43,13 @@ A tiny installer that flips your Windows shell to **Steam Big Picture** for a co
 ## 🧭 How it works
 
 - The installer sets the Windows **shell** to launch Steam Big Picture instead of `explorer.exe`.
-- Helper scripts are installed to `AppData\Roaming\SteamOSShell` (e.g., `gamemode-launcher.vbs`, `go-gamemode.cmd`, `go-desktop.cmd`).
+- Helper scripts are installed to `%AppData%\SteamOSShell\`:
+  - `gamemode.ps1` – powers the shell switching logic.  
+  - `gamemode-launcher.vbs` – launches Steam Big Picture cleanly.  
+  - `go-gamemode-admin.ps1` – admin variant for shell tasks.  
+  - `go-gamemode-user.ps1` – user variant for shell tasks.  
+  - `steam_path.txt` – stores your selected Steam installation path.  
+  - `steamdeck-gaming-return.ico` – icon used in shortcuts.  
 - When Steam exits, a small supervisor logs out the user after ~**10 seconds**. This keeps the “console mode” clean and avoids returning to Explorer.
 
 ---
@@ -51,7 +58,7 @@ A tiny installer that flips your Windows shell to **Steam Big Picture** for a co
 
 If you need a normal desktop session:
 
-- Use the provided **“Go to Desktop”** helper (if exposed in your Start Menu folder), **or**
+- Use the provided helper scripts in `%AppData%\SteamOSShell` (if exposed in your Start Menu folder), **or**
 - Press **Ctrl+Alt+Del → Sign out**, then sign back in to a desktop account where Explorer is still the default shell, **or**
 - Manually run `explorer.exe` from **Task Manager → Run new task** (temporary; next login will still boot to Steam unless you uninstall or reset the shell).
 
@@ -62,7 +69,7 @@ If you need a normal desktop session:
 - **Settings → Apps → Installed apps → SteamOS Shell → Uninstall**  
   (Also available from the **Start Menu → SteamOS Shell** folder.)
 
-Uninstall restores the default **Explorer** shell on next sign‑in.
+Uninstall restores the default **Explorer** shell on next sign-in.
 
 ---
 
@@ -73,7 +80,7 @@ Uninstall restores the default **Explorer** shell on next sign‑in.
 3. The script includes:
    - A `CurPageChanged(wpReady)` handler that appends the chosen **Steam folder** to the Ready page memo.
    - Automatic Start Menu folder creation (no user checkbox).
-   - Logout‑on‑exit flow (fixed delay ~10s).
+   - Logout-on-exit flow (fixed delay ~10s).
 
 > If you customize the delay or behavior, search for the logout/supervisor section and adjust the constant value accordingly.
 
@@ -91,7 +98,7 @@ This is by design: the session logs out after ~10s. If you need to keep the desk
 Use the latest script — it adds the Steam folder line during `wpReady`. If you forked, ensure the `CurPageChanged` handler isn’t duplicated.
 
 **PrivilegesRequired warning during compile**  
-The script uses per‑user locations but requires admin for shell changes; this is expected. Keep admin install mode enabled.
+The script uses per-user locations but requires admin for shell changes; this is expected. Keep admin install mode enabled.
 
 ---
 
@@ -99,9 +106,14 @@ The script uses per‑user locations but requires admin for shell changes; this 
 
 ```
 %AppData%\SteamOSShell\
+ ├─ gamemode.ps1
  ├─ gamemode-launcher.vbs
- ├─ go-gamemode.cmd
- └─ go-desktop.cmd
+ ├─ go-gamemode-admin.ps1
+ ├─ go-gamemode-user.ps1
+ ├─ steam_path.txt
+ ├─ steamdeck-gaming-return.ico
+ ├─ unins000.dat
+ └─ unins000.exe
 ```
 
 ---
