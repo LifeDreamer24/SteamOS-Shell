@@ -192,3 +192,26 @@ begin
     WriteFile(AppDir + '\go-gamemode-admin.ps1', S);
   end;
 end;
+
+
+procedure CurPageChanged(CurPageID: Integer);
+begin
+  if CurPageID = wpReady then
+  begin
+    try
+      // Append the chosen Steam folder to the Ready To Install memo
+      if WizardForm.ReadyMemo <> nil then
+      begin
+        // Avoid duplicating if user navigates back and forth
+        if Pos('Steam folder:', WizardForm.ReadyMemo.Lines.Text) = 0 then
+        begin
+          WizardForm.ReadyMemo.Lines.Add('');
+          WizardForm.ReadyMemo.Lines.Add('Steam folder:');
+          WizardForm.ReadyMemo.Lines.Add(SteamDirPage.Values[0]);
+        end;
+      end;
+    except
+    end;
+  end;
+end;
+
