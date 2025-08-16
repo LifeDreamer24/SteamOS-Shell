@@ -1,80 +1,67 @@
-![Windows 10+](https://img.shields.io/badge/platform-Windows%2010%2B-blue)  
-![Steam Shell](https://img.shields.io/badge/Steam-GamepadUI-lightgrey)  
-![Installer](https://img.shields.io/badge/setup-EXE--based-yellow)
+# SteamOS Shell for Windows
 
-# 🕹️ SteamOS Shell for Windows — Executable Installer Edition
-
-**SteamOS Shell** is a Windows shell replacement that launches **Steam in Big Picture Mode (Gamepad UI)** on startup, turning your PC into a console-like, couch-friendly gaming experience.  
-This branch uses a **compiled executable installer** created with *Advanced BAT to EXE Converter PRO* for fully automated setup.
+A custom Windows shell replacement that launches Steam Big Picture / Gamemode automatically when you log in — just like SteamOS.  
+When Steam closes, Explorer is restored and the user is logged out, giving you a console-like experience on Windows.
 
 ---
 
-## 🚀 Features
-
-- Replaces the Windows shell with **Steam Big Picture Mode**
-- Waits for internet connection to avoid Steam update errors
-- Restores **Windows Explorer** when Steam is closed
-- Uses `%LOCALAPPDATA%\SteamOSShell` for all files (fully portable)
-- Desktop shortcut included for easy logout and return to Game Mode
-- Fully automated **EXE installer** — no manual script running required
-
----
-
-## 🖥️ What the Installer Does
-
-- Extracts all necessary files into `%LOCALAPPDATA%\SteamOSShell`
-- Saves your custom Steam install path in `steam_path.txt`
-- Copies a custom icon to the same folder
-- Creates a shortcut on the desktop: **"Go to Gamemode"**
-- Sets `launch-steamos.bat` as the system shell on login
+## ✨ Features
+- Replaces **Explorer.exe** with a custom shell that starts Steam in Big Picture Mode.
+- When Steam exits, waits 10 seconds, restores Explorer shell, then logs out cleanly.
+- **Optional Start Menu shortcuts** (configurable during installation).
+- Proper uninstall entry in **Windows Settings → Apps & Features**.
+- Includes desktop shortcut `Go to Gamemode`.
+- Installer built with **Inno Setup**.
 
 ---
 
-## 🛠️ Included (Behind the Scenes)
+## 📥 Installation
+1. Download the latest release from the [Releases](../../releases) page.
+2. Run the installer (`SteamOS-Shell-Setup.exe`).
+3. During setup you can:
+   - Choose whether to create Start Menu shortcuts.
+   - Install/uninstall at any time via Windows Settings.
 
-- `setup-steamos.ps1` – Main setup logic (shell registration + file handling)
-- `enable-steamos.ps1` – Launches Steam in Gamepad UI after checking network
-- `disable-steamos.ps1` – Restores default Explorer shell
-- `launch-steamos.bat` – Shell entry point script
-- `uninstall-steamos.bat` – Removes the shell and restores original config
-- `steamdeck-gaming-return.ico` – Icon used for the desktop shortcut
-
----
-
-## ❓ How to Restore Desktop Manually
-
-If Steam closes and you are left with a black screen:
-
-1. Press `Ctrl + Shift + Esc` to open **Task Manager**
-2. Go to **File > Run new task**
-3. Type `explorer` and press Enter
-
-You can also press `Ctrl + Alt + Del` and select Task Manager if stuck.
+After installation, logging into Windows will start Steam instead of Explorer.
 
 ---
 
-## 🔙 Uninstallation
-
-- Run `uninstall-steamos.bat` from `%LOCALAPPDATA%\SteamOSShell`
-- Your system will reboot into the standard Windows desktop environment
-
----
-
-## 🧠 Requirements
-
-- Windows 10 or 11 (64-bit)
-- Steam installed
-- Administrator rights for setup
+## 🔄 Uninstall
+You can remove SteamOS Shell in two ways:
+- Open **Windows Settings → Apps → Installed Apps → SteamOS Shell → Uninstall**.
+- Or run `unins000.exe` from the installation folder.
 
 ---
 
-## 🙌 Credits
+## ⚠️ Safety & Recovery
+Changing the Windows shell is an advanced tweak.  
+If Steam fails to start, you might see a blank or gray screen after login.
 
-Big thanks to **ChatGPT by OpenAI** for help with scripting, logic, and automation.  
-Created with passion by **LifeDreamer24**
-
-If you like this project, please consider giving it a ⭐ on GitHub!
+To recover:
+1. Press `Ctrl+Shift+Esc` to open **Task Manager**.
+2. Go to **File → Run new task**.
+3. Type:
+   ```
+   reg add "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Shell /t REG_SZ /d explorer.exe /f
+   ```
+4. Log off and back on. Explorer should return as the default shell.
 
 ---
 
-Game on. 🎮
+## 🛠 Development
+This installer is written in [Inno Setup](https://jrsoftware.org/isinfo.php).  
+Key customizations:
+- `gamemode.ps1` handles Steam launch, Explorer restore, and logout.
+- `gamemode-launcher.vbs` runs PowerShell scripts hidden.
+- Inno `[Tasks]` used for optional Start Menu entries.
+
+---
+
+## 🤝 Contributing
+Pull requests welcome! Ideas, bug fixes, and improvements are appreciated.  
+If you encounter issues, open an [issue](../../issues).
+
+---
+
+## 📜 License
+MIT License — feel free to use, modify, and share.
