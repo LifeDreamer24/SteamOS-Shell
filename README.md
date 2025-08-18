@@ -37,6 +37,30 @@ A tiny installer that flips your Windows shell to **Steam Big Picture** for a co
 4. Sign out/in if prompted, or reboot to start directly in Steam Big Picture.
 
 > The Start Menu folder is created automatically. You don’t need to tick any option.
+---
+> [!IMPORTANT]
+> ## 🖥️ Windows Terminal vs Console Host
+>
+>On Windows 11, Microsoft made **Windows Terminal** the default host for console apps.
+>If you notice a blank Terminal window sticking around when Steam launches, it means your shell is being run under Windows Terminal instead of the classic **Console Host**.
+>
+>You can fix this by switching the default:
+>
+>### Stable / normal Windows 11
+>
+>1. Open **Settings → Privacy & security → For developers**
+>2. Scroll to **Terminal**
+>3. Change *Default terminal application* from **Windows Terminal** → **Windows Console Host**
+>4. Sign out and back in
+>
+>### Insider / Dev builds (where the setting moved)
+>
+>1. Open **Settings → System → Advanced**
+>2. Look for the **Terminal** section
+>3. Change *Default terminal application* from **Windows Terminal** → **Windows Console Host**
+>4. Sign out and back in
+>
+>After this change, SteamOS Shell will run silently with no extra window.
 
 ---
 
